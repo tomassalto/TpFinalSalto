@@ -54,6 +54,11 @@ class Compra
         return $this->fecha;
     }
 
+    public function getIdUsuario()
+    {
+        // Aquí devuelve el ID del usuario asociado a esta compra
+    }
+
     /**
      * Obtiene el valor de objUsuario
      */
@@ -195,4 +200,23 @@ class Compra
         }
         return $resp;
     }
+
+    public function buscarPorId($idCompra)
+    {
+        $objCompra = null;
+        $base = new BaseDatos();
+        $sql = "SELECT * FROM compra WHERE idCompra = " . $idCompra;
+        if ($base->Iniciar()) {
+            $res = $base->Ejecutar($sql);
+            if ($res > -1) {
+                if ($res > 0) {
+                    $row = $base->Registro();
+                    $objCompra = new Compra();
+                    $objCompra->setear($row['idCompra'], $row['coFecha'], $row['idUsuario']);
+                }
+            }
+        }
+        return $objCompra;
+    }
+
 }

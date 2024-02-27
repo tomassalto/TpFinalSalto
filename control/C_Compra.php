@@ -124,5 +124,22 @@ class C_Compra
         $arregloCompras = $objCompra->listar($where);
         return $arregloCompras;
     }
+
+    public function obtenerIdUsuarioPorCompra($idCompra)
+    {
+        $objCompra = new Compra();
+        $compra = $objCompra->buscarPorId($idCompra);
+        if ($compra) {
+            // Asumiendo que el ID del usuario está almacenado en la propiedad "idUsuario" de la compra
+            return $compra->getIdUsuario();
+        }
+        return null; // Maneja el caso donde no se encontró la compra
+    }
+
+
+
+
+
 }
+
 ?>

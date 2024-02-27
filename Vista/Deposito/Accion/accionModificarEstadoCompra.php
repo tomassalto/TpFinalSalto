@@ -1,9 +1,7 @@
 <?php
 include_once("../../../configuracion.php");
 
-/**************************************/
-/********* PROGRAMA GENERAL ***********/
-/**************************************/
+
 $datos = data_submitted();
 if (modificarEstadoCompra($datos)) {
     echo json_encode(array('success' => 1));
@@ -11,9 +9,6 @@ if (modificarEstadoCompra($datos)) {
     echo json_encode(array('success' => 0));
 }
 
-/**************************************/
-/**************** MODULOS *************/
-/**************************************/
 
 function modificarEstadoCompra($datos)
 {

@@ -158,10 +158,9 @@ class C_CompraEstado
                 }
             }
         }
-        return $arrayCompraIniciadas;
-    }
+        return $arrayCompraIniciadas;    }
 
-    public function compraEstadoActual($arrayCompra)
-    {
-    }
+  
+
+   
 }

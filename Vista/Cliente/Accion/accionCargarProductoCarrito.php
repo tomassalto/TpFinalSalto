@@ -1,9 +1,7 @@
 <?php
 include_once("../../../configuracion.php");
 
-/**************************************/
-/********* PROGRAMA GENERAL ***********/
-/**************************************/
+
 $datos = data_submitted();
 $objCompraEstadoBorrador = null;
 $arrayCompras = null;
@@ -23,9 +21,6 @@ if (($arrayCompras == null) || ($objCompraEstadoBorrador == null)) {
     cargarProducto($objCompraEstadoBorrador, $datos);
 }
 
-/**************************************/
-/**************** MODULOS *************/
-/**************************************/
 
 /* Busca con el id usuario todos las compras que realizo */
 function buscarComprasUsuario($idUsuario)

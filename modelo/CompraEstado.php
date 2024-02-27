@@ -200,5 +200,31 @@ class CompraEstado{
         }
         return $arreglo;
     }
+
+
+    function obtenerMailUsuarioPorCompraEstado($idCompraEstado)
+    {
+        $baseDatos = new BaseDatos();
+        $sql = "SELECT u.usMail
+            FROM usuario u
+            INNER JOIN compra c ON u.idUsuario = c.idUsuario
+            WHERE c.idCompra IN (
+                SELECT idCompra 
+                FROM compraestado 
+                WHERE idCompraEstado = $idCompraEstado
+            )";
+
+        $cantidadFilas = $baseDatos->Ejecutar($sql);
+
+        if ($cantidadFilas > 0) {
+            $resultado = $baseDatos->Registro();
+            return $resultado['usMail'];
+        } else {
+            return null;
+        }
+    }
+
+
+
 }
 ?>
