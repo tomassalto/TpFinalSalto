@@ -9,7 +9,7 @@ if($objSession->getVista()!=NULL){
         $arrayCompra = $objCompra->buscar($idUsuario);
         if ($arrayCompra != null) {
             $objCompraEstado = new C_CompraEstado();
-            $arrayComprasRealiazadas = $objCompraEstado->buscarCompras($arrayCompra);
+            $arrayComprasRealiazadas = $objCompraEstado->buscarCompras($arrayCompra);           
             if (count($arrayComprasRealiazadas) > 0) {
 ?>
             <div style="margin-bottom: 15%;">

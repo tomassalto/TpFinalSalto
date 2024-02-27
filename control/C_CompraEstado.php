@@ -144,7 +144,7 @@ class C_CompraEstado
         $arrayCompraIniciadas = [];
         /* Busca en el arraycompra si hay alguna que este con el estado "iniciada" */
         foreach ($arrayCompra as $compra) {
-            $idCompra["idCompra"] = $compra->getIdCompra();
+            $idCompra["idCompra"] = $compra->getIdCompra();           
             $arrayCompraEstado = $this->buscar($idCompra);
             if (count($arrayCompraEstado) > 1) {
                 foreach ($arrayCompraEstado as $compraEstado) {
@@ -158,9 +158,6 @@ class C_CompraEstado
                 }
             }
         }
-        return $arrayCompraIniciadas;    }
-
-  
-
-   
+        return $arrayCompraIniciadas;
+    }
 }

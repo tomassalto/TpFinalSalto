@@ -4,7 +4,6 @@ if($objSession->getVista()!=NULL){
     if ($objSession->getVista()->getIdRol() == 1) {
 ?>
 <script src="../js/validarContraseñaIguales.js"></script>
-<script src="https://www.google.com/recaptcha/api.js" async defer> </script>
 <script src="../js/md5.js"></script>
 <div class="container-fluid">
     <div class="container-md w-50 text-center rounded p-3 mb-2 bg-dark text-white mt-5">
@@ -57,9 +56,7 @@ if($objSession->getVista()!=NULL){
                 </div>
             </div>
             <div class="row text-center mx-auto justify-content-center">
-                <div class="col-7 text-center mx-auto mx-5">
-                    <div class="g-recaptcha m-4" data-sitekey="6Lf95XwiAAAAANd2Ey0ue87QCWiiD6_A17eONhTX"></div>
-                </div>
+               
                 <input class="btn btn-lg btn-success my-3 col-8 mt-4" type="submit" name="boton_enviar" id="boton_enviar" value="REGISTRARSE">
                 <a href="listaUsuarios.php" class="link-info mt-4">VOLVER</a>
             </div>
