@@ -1,6 +1,7 @@
 <?php
 include_once("../../../configuracion.php");
 require_once __DIR__ . '/../../../vendor/autoload.php';
+include_once '../../../control/C_Pdf.php';
 
 // config/packages/mailer.php
 use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
@@ -34,32 +35,35 @@ if ($arrayObjProductoCarrito != null) {
             modificarStockProducto($objProductoCarrito);
             $totalPrecio += $objProductoCarrito->getObjProducto()->getProPrecio() * $objProductoCarrito->getCantidad();
         }
+      
+               
+        $pdfContent = Pdf::generarPDF($arrayObjProductoCarrito, $totalPrecio);       
+        ///////
         $idCompraEstado = $arrayCompraEstado[0]->getIdCompraEstado();
         $mailUsuario = $modeloCompraEstado->obtenerMailUsuarioPorCompraEstado($idCompraEstado);
         // Construir el mensaje del correo electrónico con los datos del producto
-        $mensaje = '¡Tu compra ha sido realizada con éxito!'. "\n";
-        $mensaje .= 'Detalles de la compra:'. "\n";
+        $mensaje = '¡Tu compra ha sido realizada con éxito!' . "\n";
+        $mensaje .= 'Detalles de la compra:' . "\n";
         $mensaje .= "\n";
         foreach ($arrayObjProductoCarrito as $objProductoCarrito) {
-            $mensaje .= 'Producto: ' . $objProductoCarrito->getObjProducto()->getNombre() . ''. "\n";
-            $mensaje .= 'Precio: $' . $objProductoCarrito->getObjProducto()->getProPrecio() * $objProductoCarrito->getCantidad() .''. "\n";
-            $mensaje .= 'Cantidad: ' . $objProductoCarrito->getCantidad() . ''. "\n";
+            $mensaje .= 'Producto: ' . $objProductoCarrito->getObjProducto()->getNombre() . '' . "\n";
+            $mensaje .= 'Precio: $' . $objProductoCarrito->getObjProducto()->getProPrecio() * $objProductoCarrito->getCantidad() . '' . "\n";
+            $mensaje .= 'Cantidad: ' . $objProductoCarrito->getCantidad() . '' . "\n";
             // Puedes agregar más detalles del producto según tu estructura de datos
             $mensaje .= "\n"; // Espaciado entre productos
         }
-        $mensaje .= 'Precio total: $'.$totalPrecio. "\n";
+        $mensaje .= 'Precio total: $' . $totalPrecio . "\n";
         // Crear una instancia de Email y configurarlo
         $email = (new Email())
-        ->from('tommysaltosac@gmail.com') // Reemplaza con tu dirección de correo electrónico
-        ->to($mailUsuario) // El correo electrónico del usuario que realizó la compra
-        ->subject('¡Gracias por tu compra!')
-        ->text($mensaje);
+            ->from('tommysaltosac@gmail.com') 
+            ->to($mailUsuario) // El correo electrónico del usuario que realizó la compra
+            ->subject('¡Gracias por tu compra!')
+            ->text($mensaje);
         // Enviar el correo electrónico
+        $email->attach($pdfContent, 'comprobante_compra.pdf', 'application/pdf');
         $mailer->send($email);
 
         echo json_encode(array('success' => 1));
-    
-     
     } else {
         echo json_encode(array('success' => 0));
     }
