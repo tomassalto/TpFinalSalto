@@ -4,6 +4,7 @@ class Calificacion
 {
     private $idCalificacion;
     private $idCompra;
+    private $idProducto;
     private $idUsuario;
     private $puntuacion;
     private $comentario;
@@ -11,12 +12,17 @@ class Calificacion
 
     // Constructor, getters y setters
 
-    public function __construct($idCompra, $idUsuario, $puntuacion, $comentario)
+    public function __construct()
     {
-        $this->idCompra = $idCompra;
-        $this->idUsuario = $idUsuario;
-        $this->puntuacion = $puntuacion;
-        $this->comentario = $comentario;
+        $this->idCompra = null;
+        $this->idProducto =
+            null;
+        $this->idUsuario =
+            null;
+        $this->puntuacion =
+            null;
+        $this->comentario
+            = null;
         $this->fecha = date('Y-m-d H:i:s');
     }
 
@@ -25,7 +31,7 @@ class Calificacion
 
     /**
      * Get the value of idCalificacion
-     */ 
+     */
     public function getIdCalificacion()
     {
         return $this->idCalificacion;
@@ -35,7 +41,7 @@ class Calificacion
      * Set the value of idCalificacion
      *
      * @return  self
-     */ 
+     */
     public function setIdCalificacion($idCalificacion)
     {
         $this->idCalificacion = $idCalificacion;
@@ -45,7 +51,7 @@ class Calificacion
 
     /**
      * Get the value of idCompra
-     */ 
+     */
     public function getIdCompra()
     {
         return $this->idCompra;
@@ -55,7 +61,7 @@ class Calificacion
      * Set the value of idCompra
      *
      * @return  self
-     */ 
+     */
     public function setIdCompra($idCompra)
     {
         $this->idCompra = $idCompra;
@@ -65,7 +71,7 @@ class Calificacion
 
     /**
      * Get the value of idUsuario
-     */ 
+     */
     public function getIdUsuario()
     {
         return $this->idUsuario;
@@ -75,7 +81,7 @@ class Calificacion
      * Set the value of idUsuario
      *
      * @return  self
-     */ 
+     */
     public function setIdUsuario($idUsuario)
     {
         $this->idUsuario = $idUsuario;
@@ -85,7 +91,7 @@ class Calificacion
 
     /**
      * Get the value of puntuacion
-     */ 
+     */
     public function getPuntuacion()
     {
         return $this->puntuacion;
@@ -95,7 +101,7 @@ class Calificacion
      * Set the value of puntuacion
      *
      * @return  self
-     */ 
+     */
     public function setPuntuacion($puntuacion)
     {
         $this->puntuacion = $puntuacion;
@@ -105,7 +111,7 @@ class Calificacion
 
     /**
      * Get the value of comentario
-     */ 
+     */
     public function getComentario()
     {
         return $this->comentario;
@@ -115,7 +121,7 @@ class Calificacion
      * Set the value of comentario
      *
      * @return  self
-     */ 
+     */
     public function setComentario($comentario)
     {
         $this->comentario = $comentario;
@@ -125,7 +131,7 @@ class Calificacion
 
     /**
      * Get the value of fecha
-     */ 
+     */
     public function getFecha()
     {
         return $this->fecha;
@@ -135,10 +141,39 @@ class Calificacion
      * Set the value of fecha
      *
      * @return  self
-     */ 
+     */
     public function setFecha($fecha)
     {
         $this->fecha = $fecha;
+
+        return $this;
+    }
+
+    public function setear($idCompra, $idProducto, $idUsuario, $puntuacion, $comentario)
+    {
+        $this->setIdCompra($idCompra);
+        $this->setIdProducto($idProducto);
+        $this->setIdUsuario($idUsuario);
+        $this->setPuntuacion($puntuacion);
+        $this->setComentario($comentario);
+    }
+
+    /**
+     * Get the value of idProducto
+     */
+    public function getIdProducto()
+    {
+        return $this->idProducto;
+    }
+
+    /**
+     * Set the value of idProducto
+     *
+     * @return  self
+     */
+    public function setIdProducto($idProducto)
+    {
+        $this->idProducto = $idProducto;
 
         return $this;
     }

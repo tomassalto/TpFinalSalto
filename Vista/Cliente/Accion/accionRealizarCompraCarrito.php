@@ -4,10 +4,10 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 include_once '../../../control/C_Pdf.php';
 
 // config/packages/mailer.php
-use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
-use Symfony\Config\FrameworkConfig;
+// use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
+// use Symfony\Config\FrameworkConfig;
 
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+// use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\Transport;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mime\Email;
@@ -49,7 +49,7 @@ if ($arrayObjProductoCarrito != null) {
             $mensaje .= 'Producto: ' . $objProductoCarrito->getObjProducto()->getNombre() . '' . "\n";
             $mensaje .= 'Precio: $' . $objProductoCarrito->getObjProducto()->getProPrecio() * $objProductoCarrito->getCantidad() . '' . "\n";
             $mensaje .= 'Cantidad: ' . $objProductoCarrito->getCantidad() . '' . "\n";
-            // Puedes agregar más detalles del producto según tu estructura de datos
+            
             $mensaje .= "\n"; // Espaciado entre productos
         }
         $mensaje .= 'Precio total: $' . $totalPrecio . "\n";

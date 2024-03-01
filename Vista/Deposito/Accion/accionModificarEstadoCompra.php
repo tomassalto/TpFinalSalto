@@ -35,6 +35,7 @@ function modificarEstadoCompra($datos)
     if ($objCompraEstado->modificacion($paramCompraEstadoAnterior) && $objCompraEstado->alta($paramCompraEstadoNuevo)) {
         $resp = true;
     }
+    //cancelada
     if($datos["idCompraEstadoTipoActualizado"] == 5){
         $objCompraItem = new C_CompraItem();
         $arrayCompraItem = $objCompraItem->buscar($datos);

@@ -60,14 +60,6 @@ function registerFailure() {
     }, 1500);
 }
 
-function captchaFailure() {
-    Swal.fire({
-        icon: 'error',
-        title: 'El captcha no se realizo correctamente!',
-        showConfirmButton: false,
-        timer: 1500
-    })
-}
 
 function recargarPagina() {
     location.reload();

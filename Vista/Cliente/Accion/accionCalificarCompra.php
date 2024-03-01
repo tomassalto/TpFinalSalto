@@ -1,23 +1,46 @@
 <?php
-// Incluir el archivo de configuración u otros archivos necesarios
 include_once("../../../configuracion.php");
 
-// Obtener los datos del formulario enviado
+// Verificar si se recibieron los datos del formulario
 $datos = data_submitted();
 
-// Verificar si se recibieron todos los datos necesarios
-if (isset($datos["idCompra"], $datos["idUsuario"], $datos["puntuacion"], $datos["comentario"])) {
-    // Obtener los datos necesarios del formulario
-    $idCompra = $datos["idCompra"];
-    $idUsuario = $datos["idUsuario"];
-    $puntuacion = $datos["puntuacion"];
-    $comentario = $datos["comentario"];
+$objCompra = new C_Compra();
+$objSesion = new C_Session();
+$objCompraItem = new C_CompraItem();
+$objModelCI = new CompraItem();
+$objUsuario = $objSesion->getUsuario();
+$idCompra = $datos["idCompra"];
+$productos = $objCompraItem->buscar($idCompra);
 
-    // En este ejemplo, simplemente se retorna un JSON indicando éxito
-    $response = array("success" => 1);
-    echo json_encode($response);
-} else {
-    // Si faltan datos, se retorna un JSON indicando error
-    $response = array("success" => 0, "message" => "Faltan datos necesarios para calificar la compra.");
-    echo json_encode($response);
+$idUsuario["idUsuario"] = $objUsuario->getIdUsuario();
+$idProductos = []; // Array para almacenar los ID de producto
+
+if ($productos) {
+    // Iterar sobre los productos y obtener los idProducto
+    foreach ($productos as $producto) {
+        $idProductos[] = $producto->getObjProducto()->getIdProducto();
+    }
 }
+
+print_r($idProductos);
+die;
+// $compra = $objCompra->buscarPorId($datos['idCompra']);
+
+// // Verificar si se encontró la compra y si su estado es "enviada"
+// if ($compra && $compra->getEstado() == "enviada") {
+//     // El estado de la compra es "enviada", podemos guardar la calificación
+//     $objCalificacion = new C_Calificacion();
+//     $parametros = array(
+//         "idCompra" => $datos['idCompra'],
+//         "calificacion" => $datos['calificacion']
+//         // Puedes agregar más campos según tus necesidades
+//     );
+//     if ($objCalificacion->guardarCalificacion($parametros)) {
+//         echo json_encode(array('success' => 1));
+//     } else {
+//         echo json_encode(array('success' => 0));
+//     }
+// } else {
+//     // Si la compra no se encontró o su estado no es "enviada", retornar un mensaje de error
+//     echo json_encode(array('success' => 0));
+// }

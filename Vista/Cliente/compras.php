@@ -1,85 +1,85 @@
 <?php
 include_once('../estructura/Cabecera.php');
-if($objSession->getVista()!=NULL){
+if ($objSession->getVista() != NULL) {
     if ($objSession->getVista()->getIdRol() == 2) {
         $objUsuario = $objSession->getUsuario();
         if ($objUsuario != null) {
-        $objCompra = new C_Compra();
-        $idUsuario["idUsuario"] = $objUsuario->getIdUsuario();
-        $arrayCompra = $objCompra->buscar($idUsuario);
-        if ($arrayCompra != null) {
-            $objCompraEstado = new C_CompraEstado();
-            $arrayComprasRealiazadas = $objCompraEstado->buscarCompras($arrayCompra);
-            if (count($arrayComprasRealiazadas) > 0) {
+            $objCompra = new C_Compra();
+            $idUsuario["idUsuario"] = $objUsuario->getIdUsuario();
+            $arrayCompra = $objCompra->buscar($idUsuario);
+            if ($arrayCompra != null) {
+                $objCompraEstado = new C_CompraEstado();
+                $arrayComprasRealiazadas = $objCompraEstado->buscarCompras($arrayCompra);
+                if (count($arrayComprasRealiazadas) > 0) {
 ?>
-            <div style="margin-bottom: 15%;">
-                <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                    <div class="modal-dialog modal-xl">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title text-white" id="exampleModalToggleLabel">Productos de la compra</h1>
-                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body row">
-                                <div>
-                                    <?php
-                                    ?>
-                                    <table id="lista__carrito" class="table table-dark">
-                                        <tr>
-                                            <th>Imagen</th>
-                                            <th>Nombre</th>
-                                            <th>Descripcion</th>
-                                            <th>Precio</th>
-                                            <th>Cantidad</th>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal fade" id="exampleModalToggle1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                        <div class="modal-dialog modal-xl">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title text-white" id="exampleModalToggleLabel">Historial de compra</h1>
-                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body row">
-                                    <div>
-                                        <?php
-                                        ?>
-                                        <table id="seguimiento_compra" class="table table-dark">
-                                            <tr>
-                                                <th>ID Estado</th>
-                                                <th>Nombre Usuario</th>
-                                                <th>Estado</th>
-                                                <th>Fecha de Inicio</th>
-                                                <th>Fecha de Fin</th>
-                                            </tr>
-                                        </table>
+                    <div style="margin-bottom: 15%;">
+                        <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title text-white" id="exampleModalToggleLabel">Productos de la compra</h1>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body row">
+                                        <div>
+                                            <?php
+                                            ?>
+                                            <table id="lista__carrito" class="table table-dark">
+                                                <tr>
+                                                    <th>Imagen</th>
+                                                    <th>Nombre</th>
+                                                    <th>Descripcion</th>
+                                                    <th>Precio</th>
+                                                    <th>Cantidad</th>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="exampleModalToggle1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title text-white" id="exampleModalToggleLabel">Historial de compra</h1>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body row">
+                                        <div>
+                                            <?php
+                                            ?>
+                                            <table id="seguimiento_compra" class="table table-dark">
+                                                <tr>
+                                                    <th>ID Estado</th>
+                                                    <th>Nombre Usuario</th>
+                                                    <th>Estado</th>
+                                                    <th>Fecha de Inicio</th>
+                                                    <th>Fecha de Fin</th>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                <table class="container mt-5 table table-dark table-hover">
-                    <tr>
-                        <th>IdCompra</th>
-                        <th>Estado</th>
-                        <th>Ver productos</th>
-                        <th>Historial Compra</th>
-                    </tr>
-                    <?php
-                    if ($arrayComprasRealiazadas != null) {
-                        foreach ($arrayComprasRealiazadas as $compraRealizada) {
-                            echo '
+                        <table class="container mt-5 table table-dark table-hover">
+                            <tr>
+                                <th>IdCompra</th>
+                                <th>Estado</th>
+                                <th>Ver productos</th>
+                                <th>Historial Compra</th>
+                            </tr>
+                            <?php
+                            if ($arrayComprasRealiazadas != null) {
+                                foreach ($arrayComprasRealiazadas as $compraRealizada) {
+                                    echo '
                             <tr>
                                 <td>' . $compraRealizada->getCompra()->getIdCompra() . '</td>
                                 <td>' . $compraRealizada->getCompraEstadoTipo()->getCetDescripcion() . '</td>
@@ -94,42 +94,43 @@ if($objSession->getVista()!=NULL){
                                 <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0v1z"/>
                                 <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"/>
                               </svg></a></td>';
-                            if ($compraRealizada->getCompraEstadoTipo()->getCetDescripcion() === "enviada") {
-                                echo '<td><div id="calificacion_section_<?php echo $compraRealizada->getIdCompra(); ?>" style="margin-top: 30px;">
-                                                <h2>Calificar Compra</h2>
-                                                <form action="accionCalificarCompra.php" method="post">
-                                                    <!-- Aquí deberías tener campos ocultos para enviar el ID de la compra y el ID del usuario -->
-                                                    <input type="hidden" name="idCompra" value="<?php echo $compraRealizada->getIdCompra(); ?>">
-                                                    <input type="hidden" name="idUsuario" value="<?php echo $compraRealizada->getCompra()->getIdUsuario(); ?>">
-                                                    <label for="puntuacion">Puntuación (del 1 al 5):</label>
-                                                    <input type="number" name="puntuacion" id="puntuacion" min="1" max="5" required><br>
-                                                    <label for="comentario">Comentario:</label><br>
-                                                    <textarea name="comentario" id="comentario" cols="30" rows="5"></textarea><br>
-                                                    <input type="submit" value="Enviar Calificación">
-                                                </form>
-                                            </div></td>';
-                            } else {
-                                echo '<td></td>';
-                            '</tr>
+                                    if ($compraRealizada->getCompraEstadoTipo()->getCetDescripcion() === "enviada") {
+                                        echo '<td>
+                        <div id="calificacion_section_' . $compraRealizada->getCompra()->getIdCompra() . '" style="margin-top: 30px;">
+                            <h2>Calificar Compra</h2>
+                            <form id="formulario_calificacion_' . $compraRealizada->getCompra()->getIdCompra() . '" class="formulario_calificacion" action="Accion/accionCalificarCompra.php" method="post">
+                                <input type="hidden" name="idCompra" value="' . $compraRealizada->getCompra()->getIdCompra() . '">                                
+                                <!-- Agrega el ID del producto aquí -->
+                                <input type="hidden" name="idProducto" value="ID_DEL_PRODUCTO">
+                                <label for="calificacion">Puntuación (del 1 al 5):</label>
+                                <input type="number" name="calificacion" id="calificacion" min="1" max="5" required><br>
+                                <label for="comentario">Comentario:</label><br>
+                                <textarea name="comentario" id="comentario" cols="30" rows="5"></textarea><br>
+                                <button type="submit" value="Enviar Calificación">Enviar Calificación</button>
+                            </form>
+                        </div>
+                    </td>';
+                                    } else {
+                                        echo '<td></td>';
+                                        '</tr>
                         ';
-                        }
-                        }
-                        
-                    }
-                    ?>
-                </table>
-            </div>
+                                    }
+                                }
+                            }
+                            ?>
+                        </table>
+                    </div>
 <?php
+                }
+            }
+            if ($arrayCompra == null || count($arrayComprasRealiazadas) == 0) {
+                echo "<h2 class='text-warning text-center' style='margin-bottom:20%;margin-top:5%'> Todavia no realizaste ninguna compra! </h2>";
+            }
         }
-    }
-    if ($arrayCompra == null || count($arrayComprasRealiazadas) == 0) {
-        echo "<h2 class='text-warning text-center' style='margin-bottom:20%;margin-top:5%'> Todavia no realizaste ninguna compra! </h2>";
-    }
-}
-    }else{
+    } else {
         header('Location: ../paginas/home.php');
     }
-}else{
+} else {
     header('Location: ../paginas/home.php');
 }
 include_once("../estructura/Pie.php")
