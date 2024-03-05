@@ -215,4 +215,29 @@ class CompraItem
         return $resp;
     }
 
+    public function listarPorIdCompra($idCompra)
+    {
+        $arregloCompraitem = null;
+        $base = new BaseDatos();
+        $consultaCompraItem = "SELECT idCompraItem FROM compraitem WHERE idCompra = " . $idCompra;
+
+        if ($base->Iniciar()) {
+            if ($base->Ejecutar($consultaCompraItem)) {
+                $arregloCompraitem = array();
+                while ($compraItem = $base->Registro()) {
+                    $objCompraItem = new CompraItem();
+                    $objCompraItem->setIdCompraItem($compraItem["idCompraItem"]);
+                    array_push($arregloCompraitem, $objCompraItem);
+                }
+            } else {
+                $this->setMensajeFuncion($base->getError());
+            }
+        } else {
+            $this->setMensajeFuncion($base->getError());
+        }
+
+        return $arregloCompraitem;
+    }
+
+
 }

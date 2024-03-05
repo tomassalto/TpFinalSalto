@@ -22,22 +22,6 @@ $(document).on("click", "#ver_productos_compras", function () {
     }
   });
 
-  var compraEnviada = fila
-    .find("td[data-compra-enviada]")
-    .data("compra-enviada");
-
-  if (compraEnviada === true) {
-    // Agregar campos de calificación y comentario si la compra está enviada
-    var tablaCarrito = $("#exampleModalToggle2").find("#lista__carrito");
-    tablaCarrito.find("#calificacion_header").show(); // Mostrar la columna de calificación
-    // Crear los inputs de calificación y comentario
-    var inputsCalificacion =
-      '<input type="number" min="1" max="5" placeholder="Calificación"><input type="text" placeholder="Comentario"> <button>Enviar</button>';
-  } else {
-    var tablaCarrito = $("#exampleModalToggle2").find("#lista__carrito");
-    tablaCarrito.find("#calificacion_header").hide(); // Ocultar la columna de calificación
-  }
-
   $.ajax({
     type: "POST",
     url: "../Accion/accionVerProductosMisCompras.php",
@@ -53,8 +37,7 @@ $(document).on("click", "#ver_productos_compras", function () {
           let celda1 = fila.insertCell(1);
           let celda2 = fila.insertCell(2);
           let celda3 = fila.insertCell(3);
-          let celda4 = fila.insertCell(4);
-          let celda5 = fila.insertCell(5);
+          let celda4 = fila.insertCell(4);         
           celda0.className = "col-md-2 urlImagen_tabla";
           celda1.className = "nombre_tabla";
           celda2.className = "detalle_tabla";
@@ -67,8 +50,7 @@ $(document).on("click", "#ver_productos_compras", function () {
           celda1.innerHTML = producto.Nombre;
           celda2.innerHTML = producto.Descripcion;
           celda3.innerHTML = producto.Precio;
-          celda4.innerHTML = producto.Cantidad;
-          celda5.innerHTML = inputsCalificacion;
+          celda4.innerHTML = producto.Cantidad;          
         }
       } else if (jsonData.success == "0") {
         registerFailure();
