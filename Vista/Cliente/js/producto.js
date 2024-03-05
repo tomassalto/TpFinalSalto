@@ -66,24 +66,3 @@ function confirmarCompra() {
         })
     }
 }
-
-// $(document).ready(function () {
-//   calcularPrecioTotal();
-// });
-
-// function calcularPrecioTotal() {
-//   let totalCompra, sumaTot, tabla;
-//   tabla = document.getElementById("lista__carrito");
-//   totalCompra = document.getElementById("total-Compra");
-//   sumaTot = 0;
-//   for (i = 1; i < tabla.rows.length; i++) {
-//     sumaTot += parseInt(
-//       tabla.rows[i].cells[3].innerHTML * tabla.rows[i].cells[4].innerHTML
-//     );
-//   }
-//   totalCompra.innerHTML = "Precio Total: $ " + sumaTot;
-// }
-
-// $(document).on("click", "#logo_carrito", function () {
-//   calcularPrecioTotal();
-// });

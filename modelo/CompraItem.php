@@ -133,7 +133,7 @@ class CompraItem
         $resp = false;
         $base = new BaseDatos();
         $consulta = "UPDATE compraitem
-        SET idCompraItem = {$this->getIdCompraItem()},
+        SET 
         idProducto = {$this->getObjProducto()->getIdProducto()},
         idCompra = {$this->getObjCompra()->getIdCompra()},
         ciCantidad = {$this->getCantidad()}
@@ -214,4 +214,5 @@ class CompraItem
         }
         return $resp;
     }
+
 }

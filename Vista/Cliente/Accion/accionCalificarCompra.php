@@ -11,7 +11,8 @@ $objModelCI = new CompraItem();
 $objUsuario = $objSesion->getUsuario();
 $idCompra = $datos["idCompra"];
 $productos = $objCompraItem->buscar($idCompra);
-
+print_r($productos);
+die;
 $idUsuario["idUsuario"] = $objUsuario->getIdUsuario();
 $idProductos = []; // Array para almacenar los ID de producto
 
@@ -22,8 +23,7 @@ if ($productos) {
     }
 }
 
-print_r($idProductos);
-die;
+
 // $compra = $objCompra->buscarPorId($datos['idCompra']);
 
 // // Verificar si se encontró la compra y si su estado es "enviada"

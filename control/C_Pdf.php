@@ -4,7 +4,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
-class Pdf
+class C_Pdf
 {
     public static function generarPDF($productos, $totalPrecio)
     {

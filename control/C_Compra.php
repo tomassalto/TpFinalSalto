@@ -15,14 +15,14 @@ class C_Compra
 
         if (array_key_exists('idCompra', $param) and array_key_exists('coFecha', $param) and array_key_exists('idUsuario', $param)) {
             $objCompra = new Compra();
-            if(!$objCompra->setear($param['idCompra'], $param['coFecha'], $param['idUsuario'])){
+            if (!$objCompra->setear($param['idCompra'], $param['coFecha'], $param['idUsuario'])) {
                 $objCompra = null;
             }
         }
         return $objCompra;
     }
 
-    
+
     private function cargarObjetoConClave($param)
     {
         $obj = null;
@@ -58,11 +58,11 @@ class C_Compra
         $resp = false;
         $param['idCompra'] = null;
         $fecha = new DateTime();
-        $fechaStamp=$fecha->format('Y-m-d H:i:s');
+        $fechaStamp = $fecha->format('Y-m-d H:i:s');
         $param['coFecha'] = $fechaStamp;
         $objCompra = $this->cargarObjeto($param);
-        if ($objCompra!=null) {
-            if($objCompra->insertar()){
+        if ($objCompra != null) {
+            if ($objCompra->insertar()) {
                 $resp = true;
             }
         }
@@ -78,7 +78,7 @@ class C_Compra
         $resp = false;
         if ($this->seteadosCamposClaves($param)) {
             $objCompra = $this->cargarObjetoConClave($param);
-            if ($objCompra!=null and $objCompra->eliminar()) {
+            if ($objCompra != null and $objCompra->eliminar()) {
                 $resp = true;
             }
         }
@@ -97,7 +97,7 @@ class C_Compra
         $resp = false;
         if ($this->seteadosCamposClaves($param)) {
             $objCompra = $this->cargarObjeto($param);
-            if ($objCompra!=null and $objCompra->modificar()) {
+            if ($objCompra != null and $objCompra->modificar()) {
                 $resp = true;
             }
         }
@@ -112,15 +112,15 @@ class C_Compra
     public function buscar($param = "")
     {
         $where = " true ";
-        if ($param<>null) {
+        if ($param <> null) {
             if (isset($param["idCompra"])) {
-                $where.=" and idCompra =".$param["idCompra"];
+                $where .= " and idCompra =" . $param["idCompra"];
             }
             if (isset($param["idUsuario"])) {
-                $where.=" and idUsuario =".$param["idUsuario"];
+                $where .= " and idUsuario =" . $param["idUsuario"];
             }
         }
-        $objCompra= new Compra();
+        $objCompra = new Compra();
         $arregloCompras = $objCompra->listar($where);
         return $arregloCompras;
     }
@@ -136,10 +136,36 @@ class C_Compra
         return null; // Maneja el caso donde no se encontró la compra
     }
 
+    /* Busca con el id usuario todos las compras que realizo */
+    public static function buscarComprasUsuario($idUsuario)
+    {
+        $objCompra = new C_Compra();
+        $arrayCompra = $objCompra->buscar($idUsuario);
+        return $arrayCompra;
+    }
 
-
-
+    /* Crea una compra y compraEstado con el idusuario */
+    public static function crearCompra($idUsuario)
+    {
+        $objCompra = new C_Compra();
+        $objCompraEstado = new C_CompraEstado();
+        $arrayObjCompraEstado = null;
+        if ($objCompra->alta($idUsuario)) {
+            $arrayCompra = $objCompra->buscar($idUsuario);
+            $fecha = new DateTime();
+            $fechaStamp = $fecha->format('Y-m-d H:i:s');
+            $paramCompraEstado = [
+                "idCompra" => end($arrayCompra)->getIdCompra(),
+                "idCompraEstadoTipo" => 1,
+                "ceFechaIni" => $fechaStamp,
+                "ceFechaFin" => null
+            ];
+            if ($objCompraEstado->alta($paramCompraEstado)) {
+                $idCompra["idCompra"] = end($arrayCompra)->getIdCompra();
+                $arrayObjCompraEstado = $objCompraEstado->buscar($idCompra);
+            }
+        }
+        return $arrayObjCompraEstado[0];
+    }
 
 }
-
-?>

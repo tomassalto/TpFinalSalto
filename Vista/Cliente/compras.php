@@ -31,6 +31,7 @@ if ($objSession->getVista() != NULL) {
                                                     <th>Descripcion</th>
                                                     <th>Precio</th>
                                                     <th>Cantidad</th>
+                                                    <th id="calificacion_header" style="display: none;">Calificación</th> <!-- Columna de calificación oculta por defecto -->
                                                 </tr>
                                             </table>
                                         </div>
@@ -69,7 +70,7 @@ if ($objSession->getVista() != NULL) {
                                 </div>
                             </div>
                         </div>
-                        <table class="container mt-5 table table-dark table-hover">
+                        <table id="compras" class="container mt-5 table table-dark table-hover">
                             <tr>
                                 <th>IdCompra</th>
                                 <th>Estado</th>
@@ -94,34 +95,15 @@ if ($objSession->getVista() != NULL) {
                                 <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0v1z"/>
                                 <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"/>
                               </svg></a></td>';
-                                    if ($compraRealizada->getCompraEstadoTipo()->getCetDescripcion() === "enviada") {
-                                        echo '<td>
-                        <div id="calificacion_section_' . $compraRealizada->getCompra()->getIdCompra() . '" style="margin-top: 30px;">
-                            <h2>Calificar Compra</h2>
-                            <form id="formulario_calificacion_' . $compraRealizada->getCompra()->getIdCompra() . '" class="formulario_calificacion" action="Accion/accionCalificarCompra.php" method="post">
-                                <input type="hidden" name="idCompra" value="' . $compraRealizada->getCompra()->getIdCompra() . '">                                
-                                <!-- Agrega el ID del producto aquí -->
-                                <input type="hidden" name="idProducto" value="ID_DEL_PRODUCTO">
-                                <label for="calificacion">Puntuación (del 1 al 5):</label>
-                                <input type="number" name="calificacion" id="calificacion" min="1" max="5" required><br>
-                                <label for="comentario">Comentario:</label><br>
-                                <textarea name="comentario" id="comentario" cols="30" rows="5"></textarea><br>
-                                <button type="submit" value="Enviar Calificación">Enviar Calificación</button>
-                            </form>
-                        </div>
-                    </td>';
-                                    } else {
-                                        echo '<td></td>';
-                                        '</tr>
-                        ';
-                                    }
-                                }
+                                    echo '<td class="d-none" data-compra-enviada="' . ($compraRealizada->getCompraEstadoTipo()->getCetDescripcion() === "enviada" ? "true" : "false") . '"></td>';
+                                    echo '</tr>';
                             }
                             ?>
                         </table>
                     </div>
 <?php
                 }
+            }
             }
             if ($arrayCompra == null || count($arrayComprasRealiazadas) == 0) {
                 echo "<h2 class='text-warning text-center' style='margin-bottom:20%;margin-top:5%'> Todavia no realizaste ninguna compra! </h2>";

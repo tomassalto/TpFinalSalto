@@ -171,7 +171,7 @@ class Producto
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "UPDATE producto SET idproducto='" . $this->getIdProducto() . "', pronombre='" . $this->getNombre() . "', prodetalle='" . $this->getDetalle() . "', procantstock='" . $this->getCantStock() . "', proprecio='" . $this->getProPrecio() . "', urlimagen='" . $this->getUrlImagen() . "' WHERE idproducto='" . $this->getIdProducto() . "'";
+        $sql = "UPDATE producto SET pronombre='" . $this->getNombre() . "', prodetalle='" . $this->getDetalle() . "', procantstock='" . $this->getCantStock() . "', proprecio='" . $this->getProPrecio() . "', urlimagen='" . $this->getUrlImagen() . "' WHERE idproducto='" . $this->getIdProducto() . "'";
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;

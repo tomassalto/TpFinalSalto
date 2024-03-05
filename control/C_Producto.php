@@ -121,4 +121,25 @@ class C_Producto
         $arregloProductos = $objProducto->listar($where);
         return $arregloProductos;
     }
+
+    public static function modificarStockProducto($objProductoCarrito)
+    {
+        $objProducto = new C_Producto();
+        $idProducto["idProducto"] = $objProductoCarrito->getObjProducto()->getIdProducto();
+        $arrayProducto = $objProducto->buscar($idProducto);
+        $resp = false;
+        $stockTot = $arrayProducto[0]->getCantStock() - $objProductoCarrito->getCantidad();
+        $paramProducto = [
+            "idProducto" => $arrayProducto[0]->getIdProducto(),
+            "proNombre" => $arrayProducto[0]->getNombre(),
+            "proDetalle" => $arrayProducto[0]->getDetalle(),
+            "proPrecio" => $arrayProducto[0]->getProPrecio(),
+            "urlImagen" => $arrayProducto[0]->getUrlImagen(),
+            "proCantStock" => $stockTot
+        ];
+        if ($objProducto->modificacion($paramProducto)) {
+            $resp = true;
+        }
+        return $resp;
+    }
 }

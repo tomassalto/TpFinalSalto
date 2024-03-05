@@ -127,8 +127,7 @@ class CompraEstado{
     public function modificar(){
         $resp = false;
         $base = new BaseDatos();
-        $sql = "UPDATE compraestado SET 
-                idCompraEstado=".$this->getIdCompraEstado().", 
+        $sql = "UPDATE compraestado SET                  
                 idCompra=".$this->getCompra()->getIdCompra().", 
                 idCompraEstadoTipo=".$this->getCompraEstadoTipo()->getIdCompraEstadoTipo().", 
                 ceFechaFin='".$this->getCeFechaFin()."', 
@@ -223,8 +222,6 @@ class CompraEstado{
             return null;
         }
     }
-
-
 
 }
 ?>

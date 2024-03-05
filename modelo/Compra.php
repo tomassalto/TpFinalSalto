@@ -118,8 +118,7 @@ class Compra
     {
         $resp = false;
         $base = new BaseDatos();
-        $consulta = "UPDATE compra
-        SET idCompra = {$this->getIdCompra()},
+        $consulta = "UPDATE compra SET 
         coFecha = '{$this->getFecha()}',
         idUsuario = {$this->getObjUsuario()->getIdUsuario()},
         WHERE idCompra = {$this->getIdCompra()}";

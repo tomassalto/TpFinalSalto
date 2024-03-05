@@ -86,8 +86,7 @@ class CompraEstadoTipo{
     public function modificar(){
         $resp = false;
         $base = new BaseDatos();
-        $sql = "UPDATE compraestadotipo SET 
-                idCompraEstadoTipo='" . $this->getIdCompraEstadoTipo() . "', 
+        $sql = "UPDATE compraestadotipo SET                  
                 cetDescripcion='" . $this->getCetDescripcion() . "', 
                 cetDetalle='" . $this->getCetDetalle() . "' 
                 WHERE idcompraestadotipo='" . $this->getIdCompraEstadoTipo() . "'";

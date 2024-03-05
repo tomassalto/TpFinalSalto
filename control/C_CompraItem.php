@@ -121,4 +121,108 @@ class C_CompraItem
         $arregloCompraItem = $objCompraItem->listar($where);
         return $arregloCompraItem;
     }
+
+    public static function obtenerProductos($idCompra)
+    {
+        $objCompraItem = new C_CompraItem;
+        $arrayCompraItem = $objCompraItem->buscar($idCompra);
+        return $arrayCompraItem;
+    }
+
+    /* Arma un array para que se pueda ver en JS */
+    public function arrayArmadoJS($arrayCompraItem)
+    {
+        $arrayJS = [];
+        foreach ($arrayCompraItem as $compraItem) {
+            $param = [
+                "Nombre" => $compraItem->getObjProducto()->getNombre(),
+                "Descripcion" => $compraItem->getObjProducto()->getDetalle(),
+                "Precio" => $compraItem->getObjProducto()->getProPrecio(),
+                "Cantidad" => $compraItem->getCantidad(),
+                "UrlImagen" => $compraItem->getObjProducto()->getUrlImagen(),
+            ];
+            array_push($arrayJS, $param);
+        }
+        return $arrayJS;
+    }
+
+    /* Lo que realiza es cargarle el producto deseado */
+    public function cargarProducto($objCompraEstadoBorrador, $datos)
+    {
+        $objCompraItem = new C_CompraItem();
+        $arrayCompraItem = $objCompraItem->buscar($datos);
+        $datos["idCompra"] = $objCompraEstadoBorrador->getCompra()->getIdCompra();
+        $objCompraItemRepetido = $this->productoRepetido($arrayCompraItem, $datos["idCompra"]);
+        if ($objCompraItemRepetido == null) {
+            if ($objCompraItem->alta($datos)) {
+                echo json_encode(array('success' => 1));
+            } else {
+                echo json_encode(array('success' => 0));
+            }
+        } else {
+            $cantStockDisp = $objCompraItemRepetido->getObjProducto()->getCantStock();
+            $cantTot = $datos["ciCantidad"] + $objCompraItemRepetido->getCantidad();
+            if ($cantTot > $cantStockDisp) {
+                echo json_encode(array('success' => 0));
+            } else {
+                $param = [
+                    "idCompraItem" => $objCompraItemRepetido->getIdCompraItem(),
+                    "idProducto" => $objCompraItemRepetido->getObjProducto()->getIdProducto(),
+                    "idCompra" => $objCompraItemRepetido->getObjCompra()->getIdCompra(),
+                    "ciCantidad" => $cantTot
+                ];
+                $objCompraItem->modificacion($param);
+                echo json_encode(array('success' => 1));
+            }
+        }
+    }
+
+    public function productoRepetido($arrayCompraItem, $idCompra)
+    {
+        $resp = null;
+        if ($arrayCompraItem != null) {
+            foreach ($arrayCompraItem as $compraItem) {
+                if ($compraItem->getObjCompra()->getIdCompra() == $idCompra) {
+                    $resp = $compraItem;
+                }
+            }
+        }
+        return $resp;
+    }
+
+    public function eliminarProductoCarrito($datos)
+    {
+        $objCompraItem = new C_CompraItem();
+        $arrayCompraItem = $objCompraItem->buscar($datos);
+
+        if ($arrayCompraItem[0]->getCantidad() == $datos["ciCantidad"]) {
+            if ($objCompraItem->baja($datos)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            $cantStockTot = $arrayCompraItem[0]->getCantidad() - $datos["ciCantidad"];
+            $datos["ciCantidad"] = $cantStockTot;
+            $datos["idProducto"] = $arrayCompraItem[0]->getObjProducto()->getIdProducto();
+            $datos["idCompra"] = $arrayCompraItem[0]->getObjCompra()->getIdCompra();
+            if ($objCompraItem->modificacion($datos)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public static function calcularTotalPrecio($arrayObjProductoCarrito)
+    {
+        $totalPrecio = 0;
+        foreach ($arrayObjProductoCarrito as $objProductoCarrito) {
+            $totalPrecio += $objProductoCarrito->getObjProducto()->getProPrecio() * $objProductoCarrito->getCantidad();
+        }
+        return $totalPrecio;
+    }
+
+
+
 }

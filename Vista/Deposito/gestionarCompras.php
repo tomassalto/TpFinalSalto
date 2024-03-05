@@ -133,6 +133,6 @@ if($objSession->getVista()!=NULL){
 }
 include_once("../estructura/Pie.php")
 ?>
-<script src="js/gestinarEstadoCompra.js"></script>
+<script src="js/gestionarEstadoCompra.js"></script>
 <script src="../js/verProductoMisCompras.js"></script>
 <script src="../js/verHistorialCompra.js"></script>
