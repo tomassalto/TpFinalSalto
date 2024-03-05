@@ -139,12 +139,11 @@ class C_CompraEstado
         return $objCompraEstadoInciada;
     }
 
-    public function buscarCompras($arrayCompra)
-    {
+    public function buscarCompras($arrayCompra){
         $arrayCompraIniciadas = [];
         /* Busca en el arraycompra si hay alguna que este con el estado "iniciada" */
         foreach ($arrayCompra as $compra) {
-            $idCompra["idCompra"] = $compra->getIdCompra();
+            $idCompra["idCompra"] = $compra->getIdCompra();           
             $arrayCompraEstado = $this->buscar($idCompra);
             if (count($arrayCompraEstado) > 1) {
                 foreach ($arrayCompraEstado as $compraEstado) {

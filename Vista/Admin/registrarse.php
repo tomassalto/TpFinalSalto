@@ -55,7 +55,8 @@ if($objSession->getVista()!=NULL){
                     Correcto!
                 </div>
             </div>
-            <div class="row text-center mx-auto justify-content-center">              
+            <div class="row text-center mx-auto justify-content-center">
+               
                 <input class="btn btn-lg btn-success my-3 col-8 mt-4" type="submit" name="boton_enviar" id="boton_enviar" value="REGISTRARSE">
                 <a href="listaUsuarios.php" class="link-info mt-4">VOLVER</a>
             </div>

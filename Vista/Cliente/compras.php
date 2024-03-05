@@ -4,13 +4,13 @@ if ($objSession->getVista() != NULL) {
     if ($objSession->getVista()->getIdRol() == 2) {
         $objUsuario = $objSession->getUsuario();
         if ($objUsuario != null) {
-            $objCompra = new C_Compra();
-            $idUsuario["idUsuario"] = $objUsuario->getIdUsuario();
-            $arrayCompra = $objCompra->buscar($idUsuario);
-            if ($arrayCompra != null) {
-                $objCompraEstado = new C_CompraEstado();
-                $arrayComprasRealiazadas = $objCompraEstado->buscarCompras($arrayCompra);
-                if (count($arrayComprasRealiazadas) > 0) {
+        $objCompra = new C_Compra();
+        $idUsuario["idUsuario"] = $objUsuario->getIdUsuario();
+        $arrayCompra = $objCompra->buscar($idUsuario);
+        if ($arrayCompra != null) {
+            $objCompraEstado = new C_CompraEstado();
+            $arrayComprasRealiazadas = $objCompraEstado->buscarCompras($arrayCompra);           
+            if (count($arrayComprasRealiazadas) > 0) {
 ?>
                     <div style="margin-bottom: 15%;">
                         <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">

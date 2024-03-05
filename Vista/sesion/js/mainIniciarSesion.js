@@ -60,7 +60,6 @@ function registerFailure() {
     }, 1500);
 }
 
-
 function recargarPagina() {
     location.reload();
 }

@@ -53,16 +53,17 @@ function redireccionarIndexUser() {
 }
 
 function registerFailure() {
-  Swal.fire({
-    icon: "error",
-    title: "La cuenta no se pudo crear en la base de datos!",
-    showConfirmButton: false,
-    timer: 1500,
-  });
-  setTimeout(function () {
-    recargarPagina();
-  }, 1500);
+    Swal.fire({
+        icon: 'error',
+        title: 'La cuenta no se pudo crear en la base de datos!',
+        showConfirmButton: false,
+        timer: 1500
+    })
+    setTimeout(function () {
+        recargarPagina();
+    }, 1500);
 }
+
 
 function recargarPagina() {
   location.reload();
